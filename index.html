@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Crash Down</title>
+    <style>
+        * {
+            margin: 0;
+            user-select: none;
+        }
+
+        body {
+            background: url("img/background.png");
+            background-size: cover;
+        }
+
+        div {
+            border: 3px lightgray solid;
+            background-color: black;
+            position: absolute;
+        }
+
+        #main {
+            margin-top: 10px;
+            margin-left: 10px;
+            border: none;
+            position: relative;
+            color: white;
+        }
+
+        #gameArea {
+            margin-top: 0;
+        }
+
+        .data {
+            width: 250px;
+            height: 1.2rem;
+            padding: 5px;
+        }
+
+        .pic {
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 5px;
+            border-radius: 15px;
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+        img {
+            user-drag: none;
+            user-select: none;
+            -moz-user-select: none;
+            -webkit-user-drag: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+        }
+
+        .picDiv {
+            border: none;
+            width: 0;
+        }
+
+        #menuDiv {
+            z-index: 1;
+            background-color: rgba(0, 0, 0, 0.75);
+            font-size: 50px;
+        }
+
+        #dataDiv {
+            border: none;
+            visibility: hidden;
+        }
+
+        #instructionsDiv {
+            visibility: hidden;
+            font-size: 2rem;
+            padding: 0.5rem;
+            box-sizing: border-box;
+        }
+
+        #leaderBoardDiv {
+            visibility: hidden;
+            font-size: 2rem;
+            padding: 0.5rem;
+            box-sizing: border-box;
+        }
+
+        #submitRecordDiv {
+            visibility: hidden;
+            font-size: 2rem;
+            padding: 0.5rem;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        #recordName {
+            font-size: 2rem;
+            color: white;
+            background-color: black;
+            border: 3px lightgray solid;
+            margin-top: 15px;
+            width: 90%;
+            text-align: center;
+        }
+
+        #submitRecord {
+            font-size: 2rem;
+            color: white;
+            background-color: black;
+            border: 3px lightgray solid;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+
+        #errorMessage {
+            margin-top: 15px;
+        }
+    </style>
+    <script src="script/jquery-3.4.1.min.js"></script>
+    <script src="script/script.js"></script>
+</head>
+<body>
+
+<audio loop id="bgMusic" src="audio/bgmusic.mp3"></audio>
+<audio id="breakBlockSound" src="audio/break.mp3"></audio>
+<audio id="gameOverSound" src="audio/gameover.mp3"></audio>
+<audio id="explosionSound" src="audio/explosion.mp3"></audio>
+<audio id="lineBreakSound" src="audio/linebreak.mp3"></audio>
+<audio id="clockSound" src="audio/clock.mp3"></audio>
+
+<div id="main">
+    <div id="gameOverDiv" class="picDiv">
+        <img id="gameOver" class="pic" src="img/gameover.png" alt="game over">
+    </div>
+    <div id="mainMenuDiv" class="picDiv">
+        <img id="mainMenu" class="pic" src="img/mainmenu.png" alt="main menu">
+    </div>
+    <div id="nextLevelDiv" class="picDiv">
+        <img id="nextLevel" class="pic" src="img/nextlevel.png" alt="next level">
+    </div>
+    <div id="menuDiv">
+        <div id="logoDiv" class="picDiv">
+            <img id="logo" class="pic" src="img/crashdown.png" alt="logo">
+        </div>
+        <div id="startDiv" class="picDiv">
+            <img id="start" class="pic" src="img/start.png" alt="start">
+        </div>
+        <div id="helpDiv" class="picDiv">
+            <img id="help" class="pic" src="img/help.png" alt="help">
+        </div>
+        <div id="instructionsDiv">
+            Use your mouse to click on a group of 3 or more of the same colored squares to remove them. The aim of the game is to remove as many squares as possible which gets harder as your progress through the levels
+        </div>
+    </div>
+    <div id="gameArea"></div>
+    <div id="submitRecordDiv">
+        <label>Name:<input type="text" maxlength="9" size="9" id="recordName"></label><br>
+        <button onclick="submitRecord()" id="submitRecord">SUBMIT</button><br>
+        <p id="errorMessage"></p>
+    </div>
+    <div id="leaderBoardDiv"></div>
+    <div id="dataDiv">
+        <div id="nextRowArea"></div>
+        <div id="score" class="data">Score: 100</div>
+        <div id="level" class="data">Level: 1</div>
+        <div id="linesLeft" class="data">Lines: 15</div>
+    </div>
+</div>
+</body>
+</html>
